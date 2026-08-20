@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahdev Chandran — IT Support Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  :root{
+    --white:#ffffff;
+    --charcoal:#1d1d1f;
+    --grey:#6e6e73;
+    --grey-light:#f5f5f7;
+    --line:#e3e3e6;
+    --blue:#0071e3;
+    --blue-dark:#0060c6;
+    --black:#000000;
+    --off-black:#0b0b0c;
+    --on-dark:#f5f5f7;
+    --on-dark-grey:#a1a1a6;
+    --radius-pill:980px;
+    --radius-card:22px;
+    --ease:cubic-bezier(.5,0,0,1);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color:var(--charcoal);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.47059;
+  }
+  a{color:inherit; text-decoration:none;}
+  a, button, .btn, .card, .link-chevron, .nav-cta{ cursor:pointer; }
+  img,svg{display:block; max-width:100%;}
+  section{position:relative;}
+  a:focus-visible, button:focus-visible, .btn:focus-visible{
+    outline:2px solid var(--blue); outline-offset:3px; border-radius:6px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    height:52px;
+    display:flex; align-items:center;
+    backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    background:rgba(255,255,255,0.82);
+    border-bottom:1px solid rgba(0,0,0,0.06);
+  }
+  .nav-wrap{
+    width:100%; max-width:1100px; margin:0 auto; padding:0 22px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mark{
+    width:26px; height:26px; border-radius:8px;
+    background:var(--charcoal); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800; letter-spacing:0.5px;
+  }
+  nav ul{
+    list-style:none; display:flex; gap:34px;
+  }
+  nav a{
+    font-size:12px; font-weight:500; color:var(--charcoal);
+    opacity:0.75; transition:opacity .2s var(--ease);
+  }
+  nav a:hover{opacity:1;}
+  .nav-cta{
+    font-size:12px; font-weight:600;
+    background:var(--charcoal); color:#fff;
+    padding:7px 16px; border-radius:var(--radius-pill);
+    transition:background .2s var(--ease), transform .2s var(--ease);
+  }
+  .nav-cta:hover{background:var(--blue); transform:translateY(-1px);}
+  @media (max-width:700px){ nav ul{display:none;} }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:15px; font-weight:500; letter-spacing:0.1px;
+    padding:11px 24px; border-radius:var(--radius-pill);
+    transition:all .25s var(--ease); border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--blue); color:#fff;}
+  .btn-primary:hover{background:var(--blue-dark); transform:translateY(-1px); box-shadow:0 8px 20px rgba(0,113,227,0.28);}
+  .btn-ghost{border-color:rgba(0,0,0,0.18); color:var(--charcoal);}
+  .btn-ghost:hover{border-color:var(--charcoal); transform:translateY(-1px);}
+  .btn-ghost.on-dark{border-color:rgba(255,255,255,0.35); color:var(--on-dark);}
+  .btn-ghost.on-dark:hover{border-color:#fff;}
+  .link-chevron{
+    font-size:16px; font-weight:500; color:var(--blue);
+    display:inline-flex; align-items:center; gap:3px;
+  }
+  .link-chevron svg{width:9px; height:9px; transition:transform .2s var(--ease);}
+  .link-chevron:hover svg{transform:translateX(3px);}
+
+  .eyebrow{
+    font-size:13px; font-weight:600; letter-spacing:0.4px; text-transform:uppercase;
+    color:var(--blue);
+  }
+  .on-dark .eyebrow{color:#4db4ff;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:120px 22px 70px;
+    text-align:center;
+    max-width:900px; margin:0 auto;
+  }
+  .hero .eyebrow{display:block; margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(40px,7vw,76px);
+    font-weight:700; letter-spacing:-0.02em; line-height:1.05;
+    color:var(--charcoal);
+  }
+  .hero p.sub{
+    margin:22px auto 0; max-width:600px;
+    font-size:clamp(17px,2.4vw,22px); font-weight:400; color:var(--grey);
+  }
+  .hero .cta-row{
+    margin-top:34px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+  }
+  .stat-chips{
+    margin-top:56px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+  }
+  .chip{
+    font-size:12.5px; font-weight:500; color:var(--grey);
+    border:1px solid var(--line); padding:7px 14px; border-radius:var(--radius-pill);
+    background:var(--grey-light);
+  }
+
+  /* 3D hero visual */
+  .hero-visual{
+    margin:56px auto 0; max-width:640px; height:320px;
+    cursor:grab;
+  }
+  .hero-visual canvas{ display:block; width:100%; height:100%; }
+  @media (max-width:640px){ .hero-visual{ height:220px; margin-top:36px; } }
+
+  /* network signature graphic (fallback) */
+  .netviz{ margin:56px auto 0; max-width:640px; }
+  .netviz svg{ width:100%; height:auto; }
+  .node{ fill:var(--blue); }
+  .node-pulse{
+    fill:none; stroke:var(--blue); stroke-width:1.4; opacity:0;
+    transform-origin:center;
+    animation:pulse 3s var(--ease) infinite;
+  }
+  .edge{ stroke:#d7d7dc; stroke-width:1.2; }
+  @keyframes pulse{
+    0%{ opacity:.55; transform:scale(0.4); }
+    70%{ opacity:0; transform:scale(2.6); }
+    100%{ opacity:0; transform:scale(2.6); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .node-pulse{ animation:none; opacity:0; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal{
+    opacity:0; transform:translateY(36px);
+    transition:opacity .8s var(--ease), transform .8s var(--ease);
+  }
+  .reveal.in-view{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  /* ---------- Showcase sections ---------- */
+  .showcase{
+    padding:120px 22px;
+  }
+  .showcase.dark{ background:var(--black); color:var(--on-dark); }
+  .showcase-inner{
+    max-width:980px; margin:0 auto; text-align:center;
+  }
+  .showcase .eyebrow{ display:block; margin-bottom:16px; }
+  .showcase h2{
+    font-size:clamp(32px,5vw,56px); font-weight:700; letter-spacing:-0.02em; line-height:1.06;
+  }
+  .showcase .role{
+    margin-top:10px; font-size:clamp(16px,2vw,20px); font-weight:500; color:var(--grey);
+  }
+  .showcase.dark .role{ color:var(--on-dark-grey); }
+  .showcase .one-liner{
+    margin:18px auto 0; max-width:560px;
+    font-size:clamp(16px,2vw,19px); color:var(--grey);
+  }
+  .showcase.dark .one-liner{ color:var(--on-dark-grey); }
+  .showcase .cta-row{ margin-top:30px; display:flex; gap:22px; justify-content:center; align-items:center; flex-wrap:wrap; }
+
+  /* visual panel */
+  .panel{
+    margin:64px auto 0; max-width:880px;
+    border-radius:28px; padding:56px 40px;
+    background:linear-gradient(160deg,#f5f5f7 0%, #ffffff 60%);
+    border:1px solid var(--line);
+    display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center;
+    text-align:left;
+    position:relative; overflow:hidden;
+    transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+    will-change:transform;
+  }
+  .panel:hover{ box-shadow:0 30px 70px rgba(0,0,0,0.10); }
+  .panel::before{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
+    background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,113,227,0.10), transparent 55%);
+    transition:opacity .3s var(--ease);
+  }
+  .panel:hover::before{ opacity:1; }
+  @media (prefers-reduced-motion: reduce){
+    .panel{ transform:none !important; }
+  }
+  .showcase.dark .panel{
+    background:linear-gradient(160deg,#161618 0%, #0b0b0c 65%);
+    border-color:#232325;
+  }
+  .panel .feature-list{ list-style:none; display:flex; flex-direction:column; gap:16px; }
+  .panel .feature-list li{
+    font-size:14.5px; font-weight:500; color:var(--charcoal);
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .showcase.dark .panel .feature-list li{ color:var(--on-dark); }
+  .panel .feature-list li::before{
+    content:""; width:6px; height:6px; border-radius:50%;
+    background:var(--blue); margin-top:6px; flex-shrink:0;
+  }
+  .panel .graphic{ display:flex; align-items:center; justify-content:center; }
+  .panel .graphic svg{ width:100%; max-width:280px; }
+  @media (max-width:640px){
+    .panel{ grid-template-columns:1fr; padding:36px 24px; }
+    .panel .graphic{ order:-1; }
+    .panel .graphic svg{ max-width:180px; }
+    .showcase{ padding:80px 20px; }
+    .hero{ padding:90px 18px 50px; }
+  }
+
+  /* ---------- Skills / grid ---------- */
+  .grid-section{
+    padding:110px 22px; background:var(--grey-light);
+  }
+  .grid-head{ text-align:center; max-width:640px; margin:0 auto 56px; }
+  .grid-head .eyebrow{ display:block; margin-bottom:14px; }
+  .grid-head h2{
+    font-size:clamp(30px,4.5vw,44px); font-weight:700; letter-spacing:-0.02em;
+  }
+  .grid-head p{ margin-top:14px; font-size:17px; color:var(--grey); }
+
+  .grid{
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  }
+  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .grid{ grid-template-columns:1fr; } }
+
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:32px 28px; position:relative; overflow:hidden;
+    transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0);
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    will-change:transform;
+  }
+  .card:hover{
+    box-shadow:0 24px 48px rgba(0,0,0,0.10);
+    border-color:transparent;
+  }
+  .card::before{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
+    background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,113,227,0.12), transparent 55%);
+    transition:opacity .3s var(--ease);
+  }
+  .card:hover::before{ opacity:1; }
+  .card.contact::before{
+    background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(77,180,255,0.16), transparent 55%);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .card{ transform:none !important; }
+  }
+  .card .icon{
+    width:40px; height:40px; border-radius:12px;
+    background:var(--charcoal); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+  }
+  .card .icon svg{ width:18px; height:18px; stroke:#fff; }
+  .card h3{ font-size:18px; font-weight:600; margin-bottom:8px; }
+  .card p{ font-size:14px; color:var(--grey); line-height:1.55; }
+  .card .tags{ margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; }
+  .card .tags span{
+    font-size:11.5px; font-weight:500; color:var(--grey);
+    background:var(--grey-light); border-radius:6px; padding:4px 8px;
+  }
+  .card.contact{ background:var(--charcoal); color:#fff; }
+  .card.contact .icon{ background:var(--blue); }
+  .card.contact p, .card.contact a{ color:#c9c9cd; }
+  .card.contact .contact-link{ display:block; margin-top:6px; font-size:14px; font-weight:500; color:#fff; }
+  .card.contact .contact-link:hover{ color:var(--blue); }
+
+  /* ---------- Closing / mission band ---------- */
+  .mission{
+    background:var(--off-black); color:var(--on-dark);
+    padding:130px 22px; text-align:center;
+  }
+  .mission .eyebrow{ color:#4db4ff; display:block; margin-bottom:20px; }
+  .mission blockquote{
+    max-width:760px; margin:0 auto;
+    font-size:clamp(24px,4vw,38px); font-weight:600; letter-spacing:-0.01em; line-height:1.28;
+  }
+  .mission .cta-row{ margin-top:38px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:50px 22px 40px; background:var(--grey-light); }
+  .footer-inner{
+    max-width:1100px; margin:0 auto;
+    display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;
+  }
+  .footer-inner .fname{ font-size:14px; font-weight:600; }
+  .footer-inner .flinks{ display:flex; gap:22px; flex-wrap:wrap; }
+  .footer-inner .flinks a{ font-size:13px; color:var(--grey); }
+  .footer-inner .flinks a:hover{ color:var(--charcoal); }
+  .copyright{
+    max-width:1100px; margin:34px auto 0; padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:12px; color:var(--grey);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="#top" class="mark">MC</a>
+    <nav>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#project">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <span class="eyebrow">Mahdev Chandran</span>
+  <h1>Systems that stay up.<br>Support that shows up.</h1>
+  <p class="sub">IT Support Engineer keeping mission-critical networks running across defence, healthcare, and finance — from L2/L3 troubleshooting to full system integration.</p>
+  <div class="cta-row">
+    <a href="#work" class="btn btn-primary">View experience</a>
+    <a href="#contact" class="btn btn-ghost">Get in touch</a>
+  </div>
+  <div class="stat-chips">
+    <span class="chip">3 sectors supported — Navy · Healthcare · Finance</span>
+    <span class="chip">Nationwide DBS Bank CDM coverage</span>
+    <span class="chip">Diploma in Electronic Engineering</span>
+  </div>
+
+  <div class="hero-visual" id="hero3d" aria-hidden="true"></div>
+
+  <div class="netviz" id="heroFallback" aria-hidden="true" style="display:none;">
+    <svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg">
+      <line class="edge" x1="80" y1="80" x2="220" y2="40"/>
+      <line class="edge" x1="80" y1="80" x2="220" y2="120"/>
+      <line class="edge" x1="220" y1="40" x2="360" y2="80"/>
+      <line class="edge" x1="220" y1="120" x2="360" y2="80"/>
+      <line class="edge" x1="360" y1="80" x2="500" y2="40"/>
+      <line class="edge" x1="360" y1="80" x2="500" y2="120"/>
+      <line class="edge" x1="500" y1="40" x2="560" y2="80"/>
+      <line class="edge" x1="500" y1="120" x2="560" y2="80"/>
+
+      <circle class="node" cx="80" cy="80" r="5"/>
+      <circle class="node" cx="220" cy="40" r="4"/>
+      <circle class="node" cx="220" cy="120" r="4"/>
+      <circle class="node" cx="360" cy="80" r="6"/>
+      <circle class="node-pulse" cx="360" cy="80" r="6"/>
+      <circle class="node" cx="500" cy="40" r="4"/>
+      <circle class="node" cx="500" cy="120" r="4"/>
+      <circle class="node" cx="560" cy="80" r="5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SHOWCASE 1: Avalanche Mechtronics -->
+<section class="showcase" id="work">
+  <div class="showcase-inner">
+    <span class="eyebrow">Sept 2024 — Currently</span>
+    <h2>IT Support Engineer</h2>
+    <p class="role">Avalanche Mechtronics Pte. Ltd</p>
+    <p class="one-liner">Keeping mission-critical systems live across Singapore Navy, healthcare institutions, and education sites — with high availability across every location.</p>
+    <div class="cta-row">
+      <a href="#" class="link-chevron">Learn more <svg viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#contact" class="btn btn-ghost">Ask about this role</a>
+    </div>
+
+    <div class="panel">
+      <ul class="feature-list">
+        <li>L2/L3 troubleshooting across TCP/IP, LAN/WAN, hardware, and software</li>
+        <li>Nationwide support for DBS Bank Cash Deposit Machine systems</li>
+        <li>RS232-to-TCP integration for stable multi-device data transmission</li>
+        <li>Preventive maintenance, patching, and system upgrades</li>
+        <li>Root cause analysis, documented for long-term stability</li>
+      </ul>
+      <div class="graphic">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="20" y="130" width="160" height="16" rx="8" fill="#1d1d1f"/>
+          <rect x="20" y="102" width="160" height="16" rx="8" fill="#0071e3"/>
+          <rect x="20" y="74" width="160" height="16" rx="8" fill="#1d1d1f" opacity="0.85"/>
+          <rect x="20" y="46" width="110" height="16" rx="8" fill="#c9c9cd"/>
+          <circle cx="163" cy="54" r="10" fill="#0071e3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE 2: Kyndryl / IBM (dark) -->
+<section class="showcase dark">
+  <div class="showcase-inner">
+    <span class="eyebrow">Sept 2023 — Aug 2024</span>
+    <h2>Service Desk Engineer</h2>
+    <p class="role">Kyndryl @ IBM, Singapore</p>
+    <p class="one-liner">Frontline support for NHG and NUHS institutions and polyclinics — high-volume, high-stakes, and always inside SLA.</p>
+    <div class="cta-row">
+      <a href="#" class="link-chevron">Learn more <svg viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#contact" class="btn btn-ghost on-dark">Ask about this role</a>
+    </div>
+
+    <div class="panel">
+      <ul class="feature-list">
+        <li>End-to-end incident management, resolved within SLA</li>
+        <li>Desktop, network (LAN/WAN), and voice troubleshooting</li>
+        <li>Support for critical healthcare operations at scale</li>
+        <li>User account, VPN, and email administration via Active Directory</li>
+      </ul>
+      <div class="graphic">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="34" y="30" width="132" height="140" rx="16" stroke="#3a3a3c" stroke-width="2"/>
+          <rect x="52" y="54" width="96" height="10" rx="5" fill="#4db4ff"/>
+          <rect x="52" y="76" width="70" height="8" rx="4" fill="#5a5a5e"/>
+          <rect x="52" y="94" width="80" height="8" rx="4" fill="#5a5a5e"/>
+          <circle cx="130" cy="140" r="18" fill="#0071e3"/>
+          <path d="M122 140l6 6 12-12" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE 3: Project — Touchscreen Car Wash -->
+<section class="showcase" id="project">
+  <div class="showcase-inner">
+    <span class="eyebrow">Independent Project</span>
+    <h2>Touchscreen Self-Service Car Wash</h2>
+    <p class="role">Python · Payment processing · Embedded hardware control</p>
+    <p class="one-liner">A full-stack, Python-based system handling payment, hardware, and technician functions — architected to scale across 300+ machines.</p>
+    <div class="cta-row">
+      <a href="#" class="link-chevron">Learn more <svg viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#contact" class="btn btn-ghost">Ask about this project</a>
+    </div>
+
+    <div class="panel">
+      <ul class="feature-list">
+        <li>Touchscreen app integrating payment, machine control, and technician functions</li>
+        <li>PayNow and coin-based payment with automated activation via RS232-controlled hardware</li>
+        <li>Serial control logic for water jet, vacuum, and foam spray functions</li>
+        <li>Embedded controllers integrated across RS232/MDB communication</li>
+        <li>Scalable backend with remote monitoring across 300+ machines</li>
+      </ul>
+      <div class="graphic">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="55" y="20" width="90" height="150" rx="14" stroke="#1d1d1f" stroke-width="3"/>
+          <rect x="66" y="36" width="68" height="98" rx="4" fill="#f5f5f7"/>
+          <circle cx="100" cy="152" r="8" fill="#0071e3"/>
+          <path d="M80 70h40M80 90h40M80 110h24" stroke="#c9c9cd" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE 4: Project — RinggitPing (dark) -->
+<section class="showcase dark">
+  <div class="showcase-inner">
+    <span class="eyebrow">Independent Project</span>
+    <h2>RinggitPing</h2>
+    <p class="role">Python · Automation · Playwright · Telegram Bot API</p>
+    <p class="one-liner">A real-time SGD/MYR exchange rate tracker that flags favorable conversion windows before you convert.</p>
+    <div class="cta-row">
+      <a href="#" class="link-chevron">Learn more <svg viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#contact" class="btn btn-ghost on-dark">Ask about this project</a>
+    </div>
+
+    <div class="panel">
+      <ul class="feature-list">
+        <li>Real-time rate tracking via headless browser automation with Playwright</li>
+        <li>Multi-user Telegram bot with independent notification schedules, from 1 minute to daily</li>
+        <li>Dynamic rate-comparison logic flags favorable windows and unusual bank-margin spreads</li>
+        <li>Active DOM polling in place of full network-idle waits, cutting response time significantly</li>
+      </ul>
+      <div class="graphic">
+        <svg viewBox="0 0 200 200" fill="none">
+          <path d="M40 130 L75 90 L105 110 L160 55" stroke="#4db4ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="160" cy="55" r="7" fill="#0071e3"/>
+          <rect x="34" y="150" width="132" height="8" rx="4" fill="#3a3a3c"/>
+          <rect x="34" y="150" width="70" height="8" rx="4" fill="#0071e3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS / EDUCATION / CONTACT GRID -->
+<section class="grid-section" id="skills">
+  <div class="grid-head">
+    <span class="eyebrow">The Toolkit</span>
+    <h2>Skills, education, and how to reach me</h2>
+    <p>Everything else that keeps the systems above running.</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+      <h3>Networking & Systems</h3>
+      <p>Fundamentals across TCP/IP and LAN/WAN, hardened by daily use in the field.</p>
+      <div class="tags"><span>TCP/IP</span><span>LAN/WAN</span><span>VPN</span><span>Firewalls</span><span>Active Directory</span></div>
+    </div>
+
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 3H5a2 2 0 00-2 2v4M15 3h4a2 2 0 012 2v4M9 21H5a2 2 0 01-2-2v-4M15 21h4a2 2 0 002-2v-4"/></svg></div>
+      <h3>Troubleshooting & Integration</h3>
+      <p>Diagnosing hardware and software issues, then integrating systems that weren't built to talk.</p>
+      <div class="tags"><span>RS232–TCP</span><span>Root Cause Analysis</span><span>SLA Management</span></div>
+    </div>
+
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></div>
+      <h3>Tools & Platforms</h3>
+      <p>Comfortable building and scripting beyond the ticket queue.</p>
+      <div class="tags"><span>WordPress</span><span>Python</span><span>Playwright</span><span>Telegram Bot API</span></div>
+    </div>
+
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+      <h3>Creative Toolkit</h3>
+      <p>Design and video skills picked up for side projects and documentation.</p>
+      <div class="tags"><span>Photoshop</span><span>Canva</span><span>Premiere Pro</span><span>CapCut</span></div>
+    </div>
+
+    <div class="card" id="education">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
+      <h3>Education</h3>
+      <p>Diploma in Electronic Engineering (Communication)<br>Ibrahim Sultan Polytechnic · CGPA 3.16 · 2019–2023</p>
+      <div class="tags"><span>Sijil Pelajaran Malaysia, 2018</span></div>
+    </div>
+
+    <div class="card contact" id="contact">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg></div>
+      <h3 style="color:#fff;">Get in touch</h3>
+      <p>Based in Singapore. Open to network and system engineering roles.</p>
+      <a class="contact-link" href="mailto:mahdevchandran@gmail.com">mahdevchandran@gmail.com</a>
+      <a class="contact-link" href="tel:+6594469673">+65 9446 9673</a>
+      <a class="contact-link" href="https://devxskull.github.io/mahdev">devxskull.github.io/mahdev</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- MISSION / CLOSING BAND -->
+<section class="mission">
+  <span class="eyebrow">The Mission</span>
+  <blockquote>“Focused on minimizing downtime and improving system reliability across multi-site deployments.”</blockquote>
+  <div class="cta-row">
+    <a href="mailto:mahdevchandran@gmail.com" class="btn btn-primary">Email me</a>
+    <a href="tel:+6594469673" class="btn btn-ghost on-dark">Call me</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="fname">Mahdev Chandran</div>
+      <div style="font-size:12px;color:var(--grey);margin-top:4px;">IT Support Engineer · Singapore</div>
+    </div>
+    <div class="flinks">
+      <a href="#work">Work</a>
+      <a href="#project">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="mailto:mahdevchandran@gmail.com">Email</a>
+      <a href="tel:+6594469673">Phone</a>
+    </div>
+  </div>
+  <div class="copyright">© 2026 Mahdev Chandran. Built with care.</div>
+</footer>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 1. Interactive 3D hero network ---------- */
+  function initHero3D(){
+    var container = document.getElementById('hero3d');
+    var fallback = document.getElementById('heroFallback');
+    if(!container) return;
+    if(typeof THREE === 'undefined'){ container.style.display='none'; fallback.style.display='block'; return; }
+
+    try{
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(50, container.clientWidth/container.clientHeight, 0.1, 100);
+      camera.position.z = 13;
+
+      var renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+
+      var group = new THREE.Group();
+      scene.add(group);
+
+      var NODE_COUNT = 42;
+      var positions = [];
+      var nodeGeo = new THREE.SphereGeometry(0.085, 10, 10);
+      var nodeMat = new THREE.MeshBasicMaterial({ color: 0x0071e3 });
+      var hubMat = new THREE.MeshBasicMaterial({ color: 0x0071e3 });
+
+      for(var i=0;i<NODE_COUNT;i++){
+        var phi = Math.acos(-1 + (2*i)/NODE_COUNT);
+        var theta = Math.sqrt(NODE_COUNT*Math.PI) * phi;
+        var r = 5.6;
+        var x = r*Math.cos(theta)*Math.sin(phi);
+        var y = r*Math.sin(theta)*Math.sin(phi);
+        var z = r*Math.cos(phi);
+        var v = new THREE.Vector3(x,y,z);
+        positions.push(v);
+        var mat = (i % 7 === 0) ? hubMat : nodeMat;
+        var mesh = new THREE.Mesh(nodeGeo, mat);
+        mesh.position.copy(v);
+        if(i % 7 === 0) mesh.scale.setScalar(1.7);
+        group.add(mesh);
+      }
+
+      var lineMat = new THREE.LineBasicMaterial({ color:0xd7d7dc, transparent:true, opacity:0.45 });
+      var linePos = [];
+      for(var a=0;a<positions.length;a++){
+        for(var b=a+1;b<positions.length;b++){
+          if(positions[a].distanceTo(positions[b]) < 2.4){
+            linePos.push(positions[a].x, positions[a].y, positions[a].z);
+            linePos.push(positions[b].x, positions[b].y, positions[b].z);
+          }
+        }
+      }
+      var lineGeo = new THREE.BufferGeometry();
+      lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePos, 3));
+      group.add(new THREE.LineSegments(lineGeo, lineMat));
+
+      var targetTiltX = 0;
+      var isPointerActive = false;
+
+      container.addEventListener('mousemove', function(e){
+        var rect = container.getBoundingClientRect();
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        targetTiltX = y * 0.5;
+        isPointerActive = true;
+        container.style.cursor = 'grabbing';
+      });
+      container.addEventListener('mouseleave', function(){
+        targetTiltX = 0;
+        isPointerActive = false;
+        container.style.cursor = 'grab';
+      });
+
+      function animate(){
+        requestAnimationFrame(animate);
+        if(!reduceMotion){ group.rotation.y += 0.0022; }
+        group.rotation.x += (targetTiltX - group.rotation.x) * 0.06;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', function(){
+        if(!container.clientWidth || !container.clientHeight) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+    }catch(err){
+      container.style.display = 'none';
+      fallback.style.display = 'block';
+    }
+  }
+
+  /* ---------- 2. Mouse-tracked 3D tilt + spotlight for panels/cards ---------- */
+  function attachTilt(selector, maxDeg){
+    if(reduceMotion) return;
+    var els = document.querySelectorAll(selector);
+    els.forEach(function(el){
+      el.addEventListener('mousemove', function(e){
+        var rect = el.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width;
+        var py = (e.clientY - rect.top) / rect.height;
+        var rx = (0.5 - py) * maxDeg;
+        var ry = (px - 0.5) * maxDeg;
+        el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+        el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+        el.style.setProperty('--mx', (px*100).toFixed(1) + '%');
+        el.style.setProperty('--my', (py*100).toFixed(1) + '%');
+      });
+      el.addEventListener('mouseleave', function(){
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
+
+  /* ---------- 3. Scroll reveal ---------- */
+  function initReveal(){
+    var targets = document.querySelectorAll('.showcase-inner, .card, .mission blockquote, .grid-head');
+    targets.forEach(function(t){ t.classList.add('reveal'); });
+
+    if(reduceMotion || typeof IntersectionObserver === 'undefined'){
+      targets.forEach(function(t){ t.classList.add('in-view'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+    targets.forEach(function(t){ observer.observe(t); });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    initHero3D();
+    attachTilt('.panel', 5);
+    attachTilt('.card', 7);
+    initReveal();
+  });
+})();
+</script>
+
+</body>
+</html>
