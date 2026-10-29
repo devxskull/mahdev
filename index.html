@@ -1,755 +1,440 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mahdev Chandran — IT Support Engineer</title>
+<meta name="description" content="IT Support Engineer in Singapore keeping mission-critical systems running across defence, healthcare and finance.">
+<meta name="theme-color" content="#141414">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>
+(function(){var t='dark';try{t=localStorage.getItem('theme')||'dark';}catch(e){}document.documentElement.setAttribute('data-theme',t);})();
+</script>
 <style>
-  :root{
-    --white:#ffffff;
-    --charcoal:#1d1d1f;
-    --grey:#6e6e73;
-    --grey-light:#f5f5f7;
-    --line:#e3e3e6;
-    --blue:#0071e3;
-    --blue-dark:#0060c6;
-    --black:#000000;
-    --off-black:#0b0b0c;
-    --on-dark:#f5f5f7;
-    --on-dark-grey:#a1a1a6;
-    --radius-pill:980px;
-    --radius-card:22px;
-    --ease:cubic-bezier(.5,0,0,1);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    color:var(--charcoal);
-    background:var(--white);
-    -webkit-font-smoothing:antialiased;
-    line-height:1.47059;
-  }
-  a{color:inherit; text-decoration:none;}
-  a, button, .btn, .card, .link-chevron, .nav-cta{ cursor:pointer; }
-  img,svg{display:block; max-width:100%;}
-  section{position:relative;}
-  a:focus-visible, button:focus-visible, .btn:focus-visible{
-    outline:2px solid var(--blue); outline-offset:3px; border-radius:6px;
-  }
+:root{
+  --bg:#f6f3ec; --fg:#17171a; --muted:#6b6b72; --line:#dcd7ca; --card:#fffdf7;
+  --blue:#3a54ff; --yellow:#f6c945; --paper:#f4f0e6;
+  --serif:'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#141414; --fg:#f2efe8; --muted:#9a9a9f; --line:#2a2a2d; --card:#1b1b1d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans); background:var(--bg); color:var(--fg);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  transition:background .3s, color .3s;
+}
+a{color:inherit}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,48px)}
 
-  /* ---------- Header ---------- */
-  header{
-    position:sticky; top:0; z-index:100;
-    height:52px;
-    display:flex; align-items:center;
-    backdrop-filter:saturate(180%) blur(20px);
-    -webkit-backdrop-filter:saturate(180%) blur(20px);
-    background:rgba(255,255,255,0.82);
-    border-bottom:1px solid rgba(0,0,0,0.06);
-  }
-  .nav-wrap{
-    width:100%; max-width:1100px; margin:0 auto; padding:0 22px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .mark{
-    width:26px; height:26px; border-radius:8px;
-    background:var(--charcoal); color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    font-size:11px; font-weight:800; letter-spacing:0.5px;
-  }
-  nav ul{
-    list-style:none; display:flex; gap:34px;
-  }
-  nav a{
-    font-size:12px; font-weight:500; color:var(--charcoal);
-    opacity:0.75; transition:opacity .2s var(--ease);
-  }
-  nav a:hover{opacity:1;}
-  .nav-cta{
-    font-size:12px; font-weight:600;
-    background:var(--charcoal); color:#fff;
-    padding:7px 16px; border-radius:var(--radius-pill);
-    transition:background .2s var(--ease), transform .2s var(--ease);
-  }
-  .nav-cta:hover{background:var(--blue); transform:translateY(-1px);}
-  @media (max-width:700px){ nav ul{display:none;} }
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+nav .brand{font-family:var(--serif);font-size:24px;text-decoration:none}
+nav .links{display:flex;gap:22px;align-items:center;font-size:14px}
+nav .links a{color:var(--muted);text-decoration:none;transition:color .2s}
+nav .links a:hover{color:var(--fg)}
+.toggle{
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  font:500 13px var(--sans);color:var(--fg);background:var(--card);
+  border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+  transition:transform .2s, border-color .2s;
+}
+.toggle:hover{transform:translateY(-1px);border-color:var(--muted)}
+.toggle svg{width:15px;height:15px}
+@media (max-width:560px){nav .links a{display:none}}
 
-  /* ---------- Buttons ---------- */
-  .btn{
-    display:inline-flex; align-items:center; gap:6px;
-    font-size:15px; font-weight:500; letter-spacing:0.1px;
-    padding:11px 24px; border-radius:var(--radius-pill);
-    transition:all .25s var(--ease); border:1px solid transparent; cursor:pointer;
-  }
-  .btn-primary{background:var(--blue); color:#fff;}
-  .btn-primary:hover{background:var(--blue-dark); transform:translateY(-1px); box-shadow:0 8px 20px rgba(0,113,227,0.28);}
-  .btn-ghost{border-color:rgba(0,0,0,0.18); color:var(--charcoal);}
-  .btn-ghost:hover{border-color:var(--charcoal); transform:translateY(-1px);}
-  .btn-ghost.on-dark{border-color:rgba(255,255,255,0.35); color:var(--on-dark);}
-  .btn-ghost.on-dark:hover{border-color:#fff;}
-  .link-chevron{
-    font-size:16px; font-weight:500; color:var(--blue);
-    display:inline-flex; align-items:center; gap:3px;
-  }
-  .link-chevron svg{width:9px; height:9px; transition:transform .2s var(--ease);}
-  .link-chevron:hover svg{transform:translateX(3px);}
+/* hero */
+.stage{position:relative;height:300px;margin:18px 0 8px}
+.portrait{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:150px;height:150px;border-radius:50%;background:var(--yellow);
+  box-shadow:7px 7px 0 var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:58px;color:#17171a;
+}
+.sticker{position:absolute;width:clamp(70px,17vw,108px);filter:drop-shadow(3px 4px 0 rgba(0,0,0,.35));animation:float 6s ease-in-out infinite;transition:transform .25s}
+.sticker:hover{transform:rotate(0deg) scale(1.12)!important}
+.s1{left:6%;top:6%;transform:rotate(-10deg)}
+.s2{right:7%;top:2%;transform:rotate(9deg);animation-delay:-2s}
+.s3{left:4%;bottom:4%;transform:rotate(7deg);animation-delay:-4s}
+.s4{right:5%;bottom:2%;transform:rotate(-8deg);animation-delay:-1s}
+@keyframes float{50%{translate:0 -7px}}
+@media (max-width:560px){.stage{height:250px}.portrait{width:120px;height:120px;font-size:46px}}
 
-  .eyebrow{
-    font-size:13px; font-weight:600; letter-spacing:0.4px; text-transform:uppercase;
-    color:var(--blue);
-  }
-  .on-dark .eyebrow{color:#4db4ff;}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(38px,8vw,60px);line-height:1.08;text-align:center;letter-spacing:-.01em}
+h1 em{color:var(--blue);font-style:italic}
+[data-theme="dark"] h1 em{color:#8a9bff}
+.hello{text-align:center;color:var(--muted);font-size:15px;margin-bottom:8px}
+.lede{text-align:center;color:var(--muted);max-width:520px;margin:18px auto 0}
+.pill{display:table;margin:20px auto 0;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 14px}
 
-  /* ---------- Hero ---------- */
-  .hero{
-    padding:120px 22px 70px;
-    text-align:center;
-    max-width:900px; margin:0 auto;
-  }
-  .hero .eyebrow{display:block; margin-bottom:18px;}
-  .hero h1{
-    font-size:clamp(40px,7vw,76px);
-    font-weight:700; letter-spacing:-0.02em; line-height:1.05;
-    color:var(--charcoal);
-  }
-  .hero p.sub{
-    margin:22px auto 0; max-width:600px;
-    font-size:clamp(17px,2.4vw,22px); font-weight:400; color:var(--grey);
-  }
-  .hero .cta-row{
-    margin-top:34px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
-  }
-  .stat-chips{
-    margin-top:56px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
-  }
-  .chip{
-    font-size:12.5px; font-weight:500; color:var(--grey);
-    border:1px solid var(--line); padding:7px 14px; border-radius:var(--radius-pill);
-    background:var(--grey-light);
-  }
+/* sections */
+section{margin-top:72px}
+h2{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.year{font-family:var(--serif);font-size:26px;margin:22px 0 4px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;
+  align-items:baseline;padding:16px 0;
+}
+summary::-webkit-details-marker{display:none}
+summary .t{font-weight:600}
+summary .t small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+summary .d{color:var(--muted);font-size:13px;white-space:nowrap}
+summary:hover .t{color:var(--blue)}
+[data-theme="dark"] summary:hover .t{color:#8a9bff}
+details ul{padding:0 0 18px 18px;color:var(--muted);font-size:15px}
+details li{margin-bottom:6px}
 
-  /* 3D hero visual */
-  .hero-visual{
-    margin:56px auto 0; max-width:640px; height:320px;
-    cursor:grab;
-  }
-  .hero-visual canvas{ display:block; width:100%; height:100%; }
-  @media (max-width:640px){ .hero-visual{ height:220px; margin-top:36px; } }
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+.stack h3{font-size:14px;font-weight:600;margin-bottom:8px}
+.stack h3 span{color:var(--blue);font-family:var(--serif);font-size:20px;margin-right:8px}
+[data-theme="dark"] .stack h3 span{color:#8a9bff}
+.stack p{color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tags span{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:3px 11px;background:var(--card)}
 
-  /* network signature graphic (fallback) */
-  .netviz{ margin:56px auto 0; max-width:640px; }
-  .netviz svg{ width:100%; height:auto; }
-  .node{ fill:var(--blue); }
-  .node-pulse{
-    fill:none; stroke:var(--blue); stroke-width:1.4; opacity:0;
-    transform-origin:center;
-    animation:pulse 3s var(--ease) infinite;
-  }
-  .edge{ stroke:#d7d7dc; stroke-width:1.2; }
-  @keyframes pulse{
-    0%{ opacity:.55; transform:scale(0.4); }
-    70%{ opacity:0; transform:scale(2.6); }
-    100%{ opacity:0; transform:scale(2.6); }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .node-pulse{ animation:none; opacity:0; }
-    html{ scroll-behavior:auto; }
-  }
+.about li{margin:0 0 12px 18px;color:var(--muted)}
+.about li::marker{color:var(--yellow)}
 
-  /* ---------- Scroll reveal ---------- */
-  .reveal{
-    opacity:0; transform:translateY(36px);
-    transition:opacity .8s var(--ease), transform .8s var(--ease);
-  }
-  .reveal.in-view{ opacity:1; transform:none; }
-  @media (prefers-reduced-motion: reduce){
-    .reveal{ opacity:1; transform:none; transition:none; }
-  }
+.contact a{
+  display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line);
+  text-decoration:none;transition:padding .2s, color .2s;
+}
+.contact a:last-child{border-bottom:1px solid var(--line)}
+.contact a:hover{padding-left:8px;color:var(--blue)}
+[data-theme="dark"] .contact a:hover{color:#8a9bff}
+.contact span{color:var(--muted);font-size:14px}
 
-  /* ---------- Showcase sections ---------- */
-  .showcase{
-    padding:120px 22px;
-  }
-  .showcase.dark{ background:var(--black); color:var(--on-dark); }
-  .showcase-inner{
-    max-width:980px; margin:0 auto; text-align:center;
-  }
-  .showcase .eyebrow{ display:block; margin-bottom:16px; }
-  .showcase h2{
-    font-size:clamp(32px,5vw,56px); font-weight:700; letter-spacing:-0.02em; line-height:1.06;
-  }
-  .showcase .role{
-    margin-top:10px; font-size:clamp(16px,2vw,20px); font-weight:500; color:var(--grey);
-  }
-  .showcase.dark .role{ color:var(--on-dark-grey); }
-  .showcase .one-liner{
-    margin:18px auto 0; max-width:560px;
-    font-size:clamp(16px,2vw,19px); color:var(--grey);
-  }
-  .showcase.dark .one-liner{ color:var(--on-dark-grey); }
-  .showcase .cta-row{ margin-top:30px; display:flex; gap:22px; justify-content:center; align-items:center; flex-wrap:wrap; }
+footer{margin:80px 0 40px;text-align:center;color:var(--muted);font-size:13px}
+footer .quote{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--fg);margin-bottom:14px}
 
-  /* visual panel */
-  .panel{
-    margin:64px auto 0; max-width:880px;
-    border-radius:28px; padding:56px 40px;
-    background:linear-gradient(160deg,#f5f5f7 0%, #ffffff 60%);
-    border:1px solid var(--line);
-    display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center;
-    text-align:left;
-    position:relative; overflow:hidden;
-    transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
-    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
-    will-change:transform;
-  }
-  .panel:hover{ box-shadow:0 30px 70px rgba(0,0,0,0.10); }
-  .panel::before{
-    content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
-    background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,113,227,0.10), transparent 55%);
-    transition:opacity .3s var(--ease);
-  }
-  .panel:hover::before{ opacity:1; }
-  @media (prefers-reduced-motion: reduce){
-    .panel{ transform:none !important; }
-  }
-  .showcase.dark .panel{
-    background:linear-gradient(160deg,#161618 0%, #0b0b0c 65%);
-    border-color:#232325;
-  }
-  .panel .feature-list{ list-style:none; display:flex; flex-direction:column; gap:16px; }
-  .panel .feature-list li{
-    font-size:14.5px; font-weight:500; color:var(--charcoal);
-    display:flex; gap:10px; align-items:flex-start;
-  }
-  .showcase.dark .panel .feature-list li{ color:var(--on-dark); }
-  .panel .feature-list li::before{
-    content:""; width:6px; height:6px; border-radius:50%;
-    background:var(--blue); margin-top:6px; flex-shrink:0;
-  }
-  .panel .graphic{ display:flex; align-items:center; justify-content:center; }
-  .panel .graphic svg{ width:100%; max-width:280px; }
-  @media (max-width:640px){
-    .panel{ grid-template-columns:1fr; padding:36px 24px; }
-    .panel .graphic{ order:-1; }
-    .panel .graphic svg{ max-width:180px; }
-    .showcase{ padding:80px 20px; }
-    .hero{ padding:90px 18px 50px; }
-  }
-
-  /* ---------- Skills / grid ---------- */
-  .grid-section{
-    padding:110px 22px; background:var(--grey-light);
-  }
-  .grid-head{ text-align:center; max-width:640px; margin:0 auto 56px; }
-  .grid-head .eyebrow{ display:block; margin-bottom:14px; }
-  .grid-head h2{
-    font-size:clamp(30px,4.5vw,44px); font-weight:700; letter-spacing:-0.02em;
-  }
-  .grid-head p{ margin-top:14px; font-size:17px; color:var(--grey); }
-
-  .grid{
-    max-width:1100px; margin:0 auto;
-    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
-  }
-  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:600px){ .grid{ grid-template-columns:1fr; } }
-
-  .card{
-    background:#fff; border:1px solid var(--line); border-radius:var(--radius-card);
-    padding:32px 28px; position:relative; overflow:hidden;
-    transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0);
-    transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
-    will-change:transform;
-  }
-  .card:hover{
-    box-shadow:0 24px 48px rgba(0,0,0,0.10);
-    border-color:transparent;
-  }
-  .card::before{
-    content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
-    background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,113,227,0.12), transparent 55%);
-    transition:opacity .3s var(--ease);
-  }
-  .card:hover::before{ opacity:1; }
-  .card.contact::before{
-    background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(77,180,255,0.16), transparent 55%);
-  }
-  @media (prefers-reduced-motion: reduce){
-    .card{ transform:none !important; }
-  }
-  .card .icon{
-    width:40px; height:40px; border-radius:12px;
-    background:var(--charcoal); color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    margin-bottom:20px;
-  }
-  .card .icon svg{ width:18px; height:18px; stroke:#fff; }
-  .card h3{ font-size:18px; font-weight:600; margin-bottom:8px; }
-  .card p{ font-size:14px; color:var(--grey); line-height:1.55; }
-  .card .tags{ margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; }
-  .card .tags span{
-    font-size:11.5px; font-weight:500; color:var(--grey);
-    background:var(--grey-light); border-radius:6px; padding:4px 8px;
-  }
-  .card.contact{ background:var(--charcoal); color:#fff; }
-  .card.contact .icon{ background:var(--blue); }
-  .card.contact p, .card.contact a{ color:#c9c9cd; }
-  .card.contact .contact-link{ display:block; margin-top:6px; font-size:14px; font-weight:500; color:#fff; }
-  .card.contact .contact-link:hover{ color:var(--blue); }
-
-  /* ---------- Closing / mission band ---------- */
-  .mission{
-    background:var(--off-black); color:var(--on-dark);
-    padding:130px 22px; text-align:center;
-  }
-  .mission .eyebrow{ color:#4db4ff; display:block; margin-bottom:20px; }
-  .mission blockquote{
-    max-width:760px; margin:0 auto;
-    font-size:clamp(24px,4vw,38px); font-weight:600; letter-spacing:-0.01em; line-height:1.28;
-  }
-  .mission .cta-row{ margin-top:38px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-
-  /* ---------- Footer ---------- */
-  footer{ padding:50px 22px 40px; background:var(--grey-light); }
-  .footer-inner{
-    max-width:1100px; margin:0 auto;
-    display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;
-  }
-  .footer-inner .fname{ font-size:14px; font-weight:600; }
-  .footer-inner .flinks{ display:flex; gap:22px; flex-wrap:wrap; }
-  .footer-inner .flinks a{ font-size:13px; color:var(--grey); }
-  .footer-inner .flinks a:hover{ color:var(--charcoal); }
-  .copyright{
-    max-width:1100px; margin:34px auto 0; padding-top:20px;
-    border-top:1px solid var(--line);
-    font-size:12px; color:var(--grey);
-  }
+.sticker{cursor:grab;touch-action:none;user-select:none}
+.sticker.pop{animation-name:float,pop;animation-duration:6s,.45s;animation-iteration-count:infinite,1;animation-delay:0s,0s}
+@keyframes pop{40%{scale:1.35}}
+.portrait{cursor:pointer;transition:box-shadow .2s}
+.portrait:hover{box-shadow:11px 11px 0 var(--blue)}
+.portrait.bounce{animation:pbounce .4s}
+@keyframes pbounce{40%{scale:1.12}}
+.mini{font:500 12px var(--sans);color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;transition:transform .2s,border-color .2s}
+.mini:hover{transform:translateY(-1px);border-color:var(--blue)}
+.sechead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.sechead h2{margin:0}
+summary .d::after{content:'  +'}
+details[open] summary .d::after{content:'  \2212'}
+details.static summary .d::after{content:''}
+.tags span{transition:transform .2s,border-color .2s}
+.tags span:hover{transform:translateY(-2px) rotate(-2deg);border-color:var(--blue)}
+.term{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;font:13.5px/1.6 'SFMono-Regular',Menlo,Consolas,monospace;transition:border-color .2s}
+.term:focus-within{border-color:var(--blue)}
+.term .out{max-height:220px;overflow:auto;white-space:pre-wrap;color:var(--muted)}
+.term .cmd{color:var(--fg)}
+.term form{display:flex;gap:8px;margin-top:10px;align-items:center}
+.term form span{color:var(--blue)}
+[data-theme="dark"] .term form span{color:#8a9bff}
+.term input{flex:1;min-width:0;background:none;border:0;color:var(--fg);font:inherit;outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--fg);color:var(--bg);font-size:14px;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+/* desktop: split hero, sticky section labels */
+@media (min-width:960px){
+  nav{padding:28px 0}
+  header{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:1fr auto auto auto auto 1fr;column-gap:64px;min-height:520px;padding:24px 0}
+  header>*{grid-column:1}
+  .hello{grid-row:2}
+  .stage{grid-column:2;grid-row:1/span 6;height:460px;margin:0;align-self:center}
+  .hello,h1,.lede{text-align:left}
+  .hello{font-size:16px}
+  h1{font-size:clamp(56px,6vw,78px)}
+  .lede{margin:22px 0 0;max-width:520px;font-size:17px}
+  .pill{margin:24px 0 0;justify-self:start}
+  .portrait{width:200px;height:200px;font-size:76px}
+  .sticker{width:128px}
+  section{display:grid;grid-template-columns:220px 1fr;column-gap:56px;margin-top:100px}
+  section>h2,section>.sechead{grid-column:1;grid-row:1/span 99;position:sticky;top:28px;align-self:start}
+  section>*:not(h2):not(.sechead){grid-column:2}
+  .sechead{flex-direction:column;align-items:flex-start;gap:12px}
+  .grid{gap:36px}
+  footer{margin-top:110px}
+}
+/* mobile: bigger tap targets, no iOS input zoom, wrapping rows */
+@media (max-width:560px){
+  .mini{padding:9px 14px}
+  .toggle{padding:9px 14px}
+  .term input{font-size:16px}
+  summary{flex-wrap:wrap;gap:4px 16px}
+  summary .d{white-space:normal}
+  section{margin-top:56px}
+  .term{padding:14px}
+}
+@media (prefers-reduced-motion:reduce){.sticker,.sticker.pop,.portrait.bounce{animation:none}.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="nav-wrap">
-    <a href="#top" class="mark">MC</a>
-    <nav>
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#project">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <a href="#contact" class="nav-cta">Get in touch</a>
-  </div>
-</header>
+<!-- shared halftone / key patterns for the stickers -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.1" fill="rgba(255,255,255,.35)"/></pattern>
+    <pattern id="dotsDark" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.1" fill="rgba(0,0,0,.18)"/></pattern>
+    <pattern id="keys" width="12" height="10" patternUnits="userSpaceOnUse"><rect x="1.5" y="1.5" width="9" height="7" rx="2" fill="#3a54ff"/></pattern>
+    <pattern id="pins" width="6" height="14" patternUnits="userSpaceOnUse"><rect x="1.5" y="0" width="3" height="14" fill="#f6c945"/></pattern>
+  </defs>
+</svg>
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <span class="eyebrow">Mahdev Chandran</span>
-  <h1>Systems that stay up.<br>Support that shows up.</h1>
-  <p class="sub">IT Support Engineer keeping mission-critical networks running across defence, healthcare, and finance — from L2/L3 troubleshooting to full system integration.</p>
-  <div class="cta-row">
-    <a href="#work" class="btn btn-primary">View experience</a>
-    <a href="#contact" class="btn btn-ghost">Get in touch</a>
-  </div>
-  <div class="stat-chips">
-    <span class="chip">3 sectors supported — Navy · Healthcare · Finance</span>
-    <span class="chip">Nationwide DBS Bank CDM coverage</span>
-    <span class="chip">Diploma in Electronic Engineering</span>
-  </div>
-
-  <div class="hero-visual" id="hero3d" aria-hidden="true"></div>
-
-  <div class="netviz" id="heroFallback" aria-hidden="true" style="display:none;">
-    <svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg">
-      <line class="edge" x1="80" y1="80" x2="220" y2="40"/>
-      <line class="edge" x1="80" y1="80" x2="220" y2="120"/>
-      <line class="edge" x1="220" y1="40" x2="360" y2="80"/>
-      <line class="edge" x1="220" y1="120" x2="360" y2="80"/>
-      <line class="edge" x1="360" y1="80" x2="500" y2="40"/>
-      <line class="edge" x1="360" y1="80" x2="500" y2="120"/>
-      <line class="edge" x1="500" y1="40" x2="560" y2="80"/>
-      <line class="edge" x1="500" y1="120" x2="560" y2="80"/>
-
-      <circle class="node" cx="80" cy="80" r="5"/>
-      <circle class="node" cx="220" cy="40" r="4"/>
-      <circle class="node" cx="220" cy="120" r="4"/>
-      <circle class="node" cx="360" cy="80" r="6"/>
-      <circle class="node-pulse" cx="360" cy="80" r="6"/>
-      <circle class="node" cx="500" cy="40" r="4"/>
-      <circle class="node" cx="500" cy="120" r="4"/>
-      <circle class="node" cx="560" cy="80" r="5"/>
-    </svg>
-  </div>
-</section>
-
-<!-- SHOWCASE 1: Avalanche Mechtronics -->
-<section class="showcase" id="work">
-  <div class="showcase-inner">
-    <span class="eyebrow">Sept 2024 — Currently</span>
-    <h2>IT Support Engineer</h2>
-    <p class="role">Avalanche Mechtronics Pte. Ltd</p>
-    <p class="one-liner">Keeping mission-critical systems live across Singapore Navy, healthcare institutions, and education sites — with high availability across every location.</p>
-    <div class="cta-row">
-      <a href="#" class="link-chevron">Learn more <svg viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="#contact" class="btn btn-ghost">Ask about this role</a>
-    </div>
-
-    <div class="panel">
-      <ul class="feature-list">
-        <li>L2/L3 troubleshooting across TCP/IP, LAN/WAN, hardware, and software</li>
-        <li>Nationwide support for DBS Bank Cash Deposit Machine systems</li>
-        <li>RS232-to-TCP integration for stable multi-device data transmission</li>
-        <li>Preventive maintenance, patching, and system upgrades</li>
-        <li>Root cause analysis, documented for long-term stability</li>
-      </ul>
-      <div class="graphic">
-        <svg viewBox="0 0 200 200" fill="none">
-          <rect x="20" y="130" width="160" height="16" rx="8" fill="#1d1d1f"/>
-          <rect x="20" y="102" width="160" height="16" rx="8" fill="#0071e3"/>
-          <rect x="20" y="74" width="160" height="16" rx="8" fill="#1d1d1f" opacity="0.85"/>
-          <rect x="20" y="46" width="110" height="16" rx="8" fill="#c9c9cd"/>
-          <circle cx="163" cy="54" r="10" fill="#0071e3"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SHOWCASE 2: Kyndryl / IBM (dark) -->
-<section class="showcase dark">
-  <div class="showcase-inner">
-    <span class="eyebrow">Sept 2023 — Aug 2024</span>
-    <h2>Service Desk Engineer</h2>
-    <p class="role">Kyndryl @ IBM, Singapore</p>
-    <p class="one-liner">Frontline support for NHG and NUHS institutions and polyclinics — high-volume, high-stakes, and always inside SLA.</p>
-    <div class="cta-row">
-      <a href="#" class="link-chevron">Learn more <svg viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="#contact" class="btn btn-ghost on-dark">Ask about this role</a>
-    </div>
-
-    <div class="panel">
-      <ul class="feature-list">
-        <li>End-to-end incident management, resolved within SLA</li>
-        <li>Desktop, network (LAN/WAN), and voice troubleshooting</li>
-        <li>Support for critical healthcare operations at scale</li>
-        <li>User account, VPN, and email administration via Active Directory</li>
-      </ul>
-      <div class="graphic">
-        <svg viewBox="0 0 200 200" fill="none">
-          <rect x="34" y="30" width="132" height="140" rx="16" stroke="#3a3a3c" stroke-width="2"/>
-          <rect x="52" y="54" width="96" height="10" rx="5" fill="#4db4ff"/>
-          <rect x="52" y="76" width="70" height="8" rx="4" fill="#5a5a5e"/>
-          <rect x="52" y="94" width="80" height="8" rx="4" fill="#5a5a5e"/>
-          <circle cx="130" cy="140" r="18" fill="#0071e3"/>
-          <path d="M122 140l6 6 12-12" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SHOWCASE 3: Project — Touchscreen Car Wash -->
-<section class="showcase" id="project">
-  <div class="showcase-inner">
-    <span class="eyebrow">Independent Project</span>
-    <h2>Touchscreen Self-Service Car Wash</h2>
-    <p class="role">Python · Payment processing · Embedded hardware control</p>
-    <p class="one-liner">A full-stack, Python-based system handling payment, hardware, and technician functions — architected to scale across 300+ machines.</p>
-    <div class="cta-row">
-      <a href="#" class="link-chevron">Learn more <svg viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="#contact" class="btn btn-ghost">Ask about this project</a>
-    </div>
-
-    <div class="panel">
-      <ul class="feature-list">
-        <li>Touchscreen app integrating payment, machine control, and technician functions</li>
-        <li>PayNow and coin-based payment with automated activation via RS232-controlled hardware</li>
-        <li>Serial control logic for water jet, vacuum, and foam spray functions</li>
-        <li>Embedded controllers integrated across RS232/MDB communication</li>
-        <li>Scalable backend with remote monitoring across 300+ machines</li>
-      </ul>
-      <div class="graphic">
-        <svg viewBox="0 0 200 200" fill="none">
-          <rect x="55" y="20" width="90" height="150" rx="14" stroke="#1d1d1f" stroke-width="3"/>
-          <rect x="66" y="36" width="68" height="98" rx="4" fill="#f5f5f7"/>
-          <circle cx="100" cy="152" r="8" fill="#0071e3"/>
-          <path d="M80 70h40M80 90h40M80 110h24" stroke="#c9c9cd" stroke-width="4" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SHOWCASE 4: Project — RinggitPing (dark) -->
-<section class="showcase dark">
-  <div class="showcase-inner">
-    <span class="eyebrow">Independent Project</span>
-    <h2>RinggitPing</h2>
-    <p class="role">Python · Automation · Playwright · Telegram Bot API</p>
-    <p class="one-liner">A real-time SGD/MYR exchange rate tracker that flags favorable conversion windows before you convert.</p>
-    <div class="cta-row">
-      <a href="#" class="link-chevron">Learn more <svg viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="#contact" class="btn btn-ghost on-dark">Ask about this project</a>
-    </div>
-
-    <div class="panel">
-      <ul class="feature-list">
-        <li>Real-time rate tracking via headless browser automation with Playwright</li>
-        <li>Multi-user Telegram bot with independent notification schedules, from 1 minute to daily</li>
-        <li>Dynamic rate-comparison logic flags favorable windows and unusual bank-margin spreads</li>
-        <li>Active DOM polling in place of full network-idle waits, cutting response time significantly</li>
-      </ul>
-      <div class="graphic">
-        <svg viewBox="0 0 200 200" fill="none">
-          <path d="M40 130 L75 90 L105 110 L160 55" stroke="#4db4ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="160" cy="55" r="7" fill="#0071e3"/>
-          <rect x="34" y="150" width="132" height="8" rx="4" fill="#3a3a3c"/>
-          <rect x="34" y="150" width="70" height="8" rx="4" fill="#0071e3"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS / EDUCATION / CONTACT GRID -->
-<section class="grid-section" id="skills">
-  <div class="grid-head">
-    <span class="eyebrow">The Toolkit</span>
-    <h2>Skills, education, and how to reach me</h2>
-    <p>Everything else that keeps the systems above running.</p>
-  </div>
-
-  <div class="grid">
-
-    <div class="card">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
-      <h3>Networking & Systems</h3>
-      <p>Fundamentals across TCP/IP and LAN/WAN, hardened by daily use in the field.</p>
-      <div class="tags"><span>TCP/IP</span><span>LAN/WAN</span><span>VPN</span><span>Firewalls</span><span>Active Directory</span></div>
-    </div>
-
-    <div class="card">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 3H5a2 2 0 00-2 2v4M15 3h4a2 2 0 012 2v4M9 21H5a2 2 0 01-2-2v-4M15 21h4a2 2 0 002-2v-4"/></svg></div>
-      <h3>Troubleshooting & Integration</h3>
-      <p>Diagnosing hardware and software issues, then integrating systems that weren't built to talk.</p>
-      <div class="tags"><span>RS232–TCP</span><span>Root Cause Analysis</span><span>SLA Management</span></div>
-    </div>
-
-    <div class="card">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></div>
-      <h3>Tools & Platforms</h3>
-      <p>Comfortable building and scripting beyond the ticket queue.</p>
-      <div class="tags"><span>WordPress</span><span>Python</span><span>Playwright</span><span>Telegram Bot API</span></div>
-    </div>
-
-    <div class="card">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-      <h3>Creative Toolkit</h3>
-      <p>Design and video skills picked up for side projects and documentation.</p>
-      <div class="tags"><span>Photoshop</span><span>Canva</span><span>Premiere Pro</span><span>CapCut</span></div>
-    </div>
-
-    <div class="card" id="education">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
-      <h3>Education</h3>
-      <p>Diploma in Electronic Engineering (Communication)<br>Ibrahim Sultan Polytechnic · CGPA 3.16 · 2019–2023</p>
-      <div class="tags"><span>Sijil Pelajaran Malaysia, 2018</span></div>
-    </div>
-
-    <div class="card contact" id="contact">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg></div>
-      <h3 style="color:#fff;">Get in touch</h3>
-      <p>Based in Singapore. Open to network and system engineering roles.</p>
-      <a class="contact-link" href="mailto:mahdevchandran@gmail.com">mahdevchandran@gmail.com</a>
-      <a class="contact-link" href="tel:+6594469673">+65 9446 9673</a>
-      <a class="contact-link" href="https://devxskull.github.io/mahdev">devxskull.github.io/mahdev</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- MISSION / CLOSING BAND -->
-<section class="mission">
-  <span class="eyebrow">The Mission</span>
-  <blockquote>“Focused on minimizing downtime and improving system reliability across multi-site deployments.”</blockquote>
-  <div class="cta-row">
-    <a href="mailto:mahdevchandran@gmail.com" class="btn btn-primary">Email me</a>
-    <a href="tel:+6594469673" class="btn btn-ghost on-dark">Call me</a>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="fname">Mahdev Chandran</div>
-      <div style="font-size:12px;color:var(--grey);margin-top:4px;">IT Support Engineer · Singapore</div>
-    </div>
-    <div class="flinks">
+<div class="wrap">
+  <nav>
+    <a href="#top" class="brand">Mahdev.</a>
+    <div class="links">
       <a href="#work">Work</a>
-      <a href="#project">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="mailto:mahdevchandran@gmail.com">Email</a>
-      <a href="tel:+6594469673">Phone</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+      <button class="toggle" id="themeBtn" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>
+        <span id="themeLabel">Lights on</span>
+      </button>
     </div>
-  </div>
-  <div class="copyright">© 2026 Mahdev Chandran. Built with care.</div>
-</footer>
+  </nav>
+
+  <header id="top">
+    <div class="stage">
+      <!-- network switch -->
+      <svg class="sticker s1" viewBox="0 0 100 100"><rect x="5" y="32" width="90" height="36" rx="7" fill="#3a54ff"/><rect x="5" y="32" width="90" height="36" rx="7" fill="url(#dots)"/><g fill="#0d1240"><rect x="13" y="46" width="8" height="10" rx="1.5"/><rect x="24" y="46" width="8" height="10" rx="1.5"/><rect x="35" y="46" width="8" height="10" rx="1.5"/><rect x="46" y="46" width="8" height="10" rx="1.5"/><rect x="57" y="46" width="8" height="10" rx="1.5"/><rect x="68" y="46" width="8" height="10" rx="1.5"/></g><g fill="#f6c945"><circle cx="17" cy="40" r="2"/><circle cx="28" cy="40" r="2"/><circle cx="39" cy="40" r="2"/><circle cx="50" cy="40" r="2"/></g><circle cx="86" cy="42" r="3" fill="#f4f0e6"/></svg>
+      <!-- coffee cup -->
+      <svg class="sticker s2" viewBox="0 0 100 100"><path d="M26 40h44v22a20 20 0 0 1-20 20h-4a20 20 0 0 1-20-20z" fill="#f4f0e6"/><path d="M26 40h44v22a20 20 0 0 1-20 20h-4a20 20 0 0 1-20-20z" fill="url(#dotsDark)"/><path d="M70 48h5a9 9 0 0 1 0 18h-6" stroke="#f4f0e6" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="23" y="35" width="50" height="8" rx="4" fill="#f6c945"/><path d="M40 28c-3-4 3-7 0-12M54 28c-3-4 3-7 0-12" stroke="#f4f0e6" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      <!-- keyboard -->
+      <svg class="sticker s3" viewBox="0 0 100 100"><rect x="6" y="30" width="88" height="44" rx="8" fill="#262a3a"/><rect x="10" y="35" width="72" height="30" fill="url(#keys)"/><rect x="82" y="35" width="8" height="30" rx="2" fill="#f6c945"/><rect x="26" y="68" width="48" height="3" rx="1.5" fill="#3a54ff"/></svg>
+      <!-- RJ45 plug -->
+      <svg class="sticker s4" viewBox="0 0 100 100"><path d="M50 98c0-18-14-14-14-30" stroke="#3a54ff" stroke-width="9" fill="none" stroke-linecap="round"/><rect x="28" y="16" width="44" height="42" rx="5" fill="#f4f0e6"/><rect x="28" y="16" width="44" height="42" rx="5" fill="url(#dotsDark)"/><rect x="33" y="20" width="34" height="14" fill="url(#pins)"/><rect x="42" y="58" width="16" height="10" fill="#f4f0e6"/><rect x="45" y="44" width="10" height="8" rx="2" fill="#3a54ff"/></svg>
+
+      <div class="portrait">MC</div>
+    </div>
+
+    <p class="hello">Hello, I’m Mahdev Chandran</p>
+    <h1>I keep mission-critical <em>systems</em> running.</h1>
+    <p class="lede">IT Support Engineer supporting Singapore Navy, healthcare and financial systems. L2/L3 troubleshooting, RS232-to-TCP integration, and a habit of building things on the side.</p>
+    <span class="pill">Singapore</span>
+  </header>
+
+  <section id="work">
+    <div class="sechead"><h2>Work</h2><button class="mini" id="expandBtn" type="button">Expand all</button></div>
+    <div class="year">2024 — now</div>
+    <details open>
+      <summary><span class="t">Avalanche Mechtronics<small>IT Support Engineer</small></span><span class="d">Sept 2024 — Present</span></summary>
+      <ul>
+        <li>Supported mission-critical systems across Singapore Navy, healthcare and education sites with high availability.</li>
+        <li>L2/L3 troubleshooting for network (TCP/IP, LAN/WAN), hardware and software issues.</li>
+        <li>Nationwide support for DBS Bank Cash Deposit Machine systems.</li>
+        <li>Diagnosed and resolved RS232-to-TCP integration issues for stable data transmission.</li>
+        <li>Preventive maintenance, patching and upgrades; root cause analysis documented for long-term stability.</li>
+      </ul>
+    </details>
+    <div class="year">2023</div>
+    <details>
+      <summary><span class="t">Kyndryl @ IBM<small>Service Desk Engineer</small></span><span class="d">Sept 2023 — Aug 2024</span></summary>
+      <ul>
+        <li>IT support for NHG, NUHS institutions and polyclinics in a high-volume enterprise environment.</li>
+        <li>End-to-end incident management within SLA requirements.</li>
+        <li>Desktop, network (LAN/WAN) and voice troubleshooting for critical healthcare operations.</li>
+        <li>User accounts, VPN access and email support using Active Directory.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <details open>
+      <summary><span class="t">Touchscreen Self-Service Car Wash<small>Python · RS232/MDB · PayNow</small></span><span class="d">300+ machines in mind</span></summary>
+      <ul>
+        <li>Python touchscreen app combining payment processing, machine control and technician functions.</li>
+        <li>PayNow and coin payments with automated activation through RS232-controlled hardware.</li>
+        <li>Serial control logic for water jet, vacuum and foam spray; scalable backend with remote monitoring.</li>
+      </ul>
+    </details>
+    <details>
+      <summary><span class="t">RinggitPing<small>Python · Playwright · Telegram Bot API</small></span><span class="d">SGD/MYR tracker</span></summary>
+      <ul>
+        <li>Real-time exchange rate tracker using headless browser automation to scrape JavaScript-rendered sources.</li>
+        <li>Multi-user Telegram bot with per-user notification schedules, from every minute to daily.</li>
+        <li>Rate-comparison logic that flags favourable conversion windows and unusual bank margins.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section id="stack">
+    <h2>Stack</h2>
+    <div class="grid stack">
+      <div><h3><span>01</span>Networking &amp; Systems</h3><div class="tags"><span>TCP/IP</span><span>LAN/WAN</span><span>VPN</span><span>Firewalls</span><span>Active Directory</span></div></div>
+      <div><h3><span>02</span>Troubleshooting</h3><div class="tags"><span>RS232 to TCP</span><span>Root cause analysis</span><span>Incident &amp; SLA</span></div></div>
+      <div><h3><span>03</span>Tools</h3><div class="tags"><span>Python</span><span>Playwright</span><span>Telegram Bot API</span><span>WordPress</span></div></div>
+      <div><h3><span>04</span>Creative</h3><div class="tags"><span>Photoshop</span><span>Canva</span><span>Premiere Pro</span><span>CapCut</span></div></div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>Hello there!</h2>
+    <ul>
+      <li>I’m Mahdev, an IT Support Engineer who likes the moment a flaky system finally stays up.</li>
+      <li>Most of my work is minimising downtime across multi-site deployments.</li>
+      <li>Right now I’m aiming at network and system engineering roles.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <details open class="static" style="border-top:1px solid var(--line)">
+      <summary style="cursor:default"><span class="t">Diploma in Electronic Engineering (Communication)<small>Ibrahim Sultan Polytechnic · CGPA 3.16</small></span><span class="d">2019 — 2023</span></summary>
+    </details>
+  </section>
+
+  <section id="terminal">
+    <h2>Poke around</h2>
+    <div class="term">
+      <div class="out" id="out" aria-live="polite"></div>
+      <form id="tform" autocomplete="off"><span>$</span><input id="tin" spellcheck="false" aria-label="Terminal command" placeholder="type a command, e.g. help"></form>
+    </div>
+    <div class="chips">
+      <button class="mini" type="button" data-cmd="help">help</button>
+      <button class="mini" type="button" data-cmd="about">about</button>
+      <button class="mini" type="button" data-cmd="work">work</button>
+      <button class="mini" type="button" data-cmd="projects">projects</button>
+      <button class="mini" type="button" data-cmd="skills">skills</button>
+      <button class="mini" type="button" data-cmd="ping">ping</button>
+      <button class="mini" type="button" data-cmd="contact">contact</button>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="sechead"><h2>Say hello</h2><button class="mini" id="copyEmail" type="button">Copy email</button></div>
+    <a href="mailto:mahdevchandran@gmail.com">Email <span>mahdevchandran@gmail.com</span></a>
+    <a href="tel:+6594469673">Phone <span>+65 9446 9673</span></a>
+    <a href="https://github.com/devxskull" target="_blank" rel="noopener">GitHub <span>@devxskull</span></a>
+  </section>
+
+  <footer>
+    <p class="quote">Systems that stay up. Support that shows up.</p>
+    <p>Built with care in Singapore.</p>
+  </footer>
+</div>
 
 <script>
 (function(){
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- 1. Interactive 3D hero network ---------- */
-  function initHero3D(){
-    var container = document.getElementById('hero3d');
-    var fallback = document.getElementById('heroFallback');
-    if(!container) return;
-    if(typeof THREE === 'undefined'){ container.style.display='none'; fallback.style.display='block'; return; }
-
-    try{
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(50, container.clientWidth/container.clientHeight, 0.1, 100);
-      camera.position.z = 13;
-
-      var renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      container.appendChild(renderer.domElement);
-
-      var group = new THREE.Group();
-      scene.add(group);
-
-      var NODE_COUNT = 42;
-      var positions = [];
-      var nodeGeo = new THREE.SphereGeometry(0.085, 10, 10);
-      var nodeMat = new THREE.MeshBasicMaterial({ color: 0x0071e3 });
-      var hubMat = new THREE.MeshBasicMaterial({ color: 0x0071e3 });
-
-      for(var i=0;i<NODE_COUNT;i++){
-        var phi = Math.acos(-1 + (2*i)/NODE_COUNT);
-        var theta = Math.sqrt(NODE_COUNT*Math.PI) * phi;
-        var r = 5.6;
-        var x = r*Math.cos(theta)*Math.sin(phi);
-        var y = r*Math.sin(theta)*Math.sin(phi);
-        var z = r*Math.cos(phi);
-        var v = new THREE.Vector3(x,y,z);
-        positions.push(v);
-        var mat = (i % 7 === 0) ? hubMat : nodeMat;
-        var mesh = new THREE.Mesh(nodeGeo, mat);
-        mesh.position.copy(v);
-        if(i % 7 === 0) mesh.scale.setScalar(1.7);
-        group.add(mesh);
-      }
-
-      var lineMat = new THREE.LineBasicMaterial({ color:0xd7d7dc, transparent:true, opacity:0.45 });
-      var linePos = [];
-      for(var a=0;a<positions.length;a++){
-        for(var b=a+1;b<positions.length;b++){
-          if(positions[a].distanceTo(positions[b]) < 2.4){
-            linePos.push(positions[a].x, positions[a].y, positions[a].z);
-            linePos.push(positions[b].x, positions[b].y, positions[b].z);
-          }
-        }
-      }
-      var lineGeo = new THREE.BufferGeometry();
-      lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePos, 3));
-      group.add(new THREE.LineSegments(lineGeo, lineMat));
-
-      var targetTiltX = 0;
-      var isPointerActive = false;
-
-      container.addEventListener('mousemove', function(e){
-        var rect = container.getBoundingClientRect();
-        var y = (e.clientY - rect.top) / rect.height - 0.5;
-        targetTiltX = y * 0.5;
-        isPointerActive = true;
-        container.style.cursor = 'grabbing';
-      });
-      container.addEventListener('mouseleave', function(){
-        targetTiltX = 0;
-        isPointerActive = false;
-        container.style.cursor = 'grab';
-      });
-
-      function animate(){
-        requestAnimationFrame(animate);
-        if(!reduceMotion){ group.rotation.y += 0.0022; }
-        group.rotation.x += (targetTiltX - group.rotation.x) * 0.06;
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      window.addEventListener('resize', function(){
-        if(!container.clientWidth || !container.clientHeight) return;
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-      });
-    }catch(err){
-      container.style.display = 'none';
-      fallback.style.display = 'block';
-    }
-  }
-
-  /* ---------- 2. Mouse-tracked 3D tilt + spotlight for panels/cards ---------- */
-  function attachTilt(selector, maxDeg){
-    if(reduceMotion) return;
-    var els = document.querySelectorAll(selector);
-    els.forEach(function(el){
-      el.addEventListener('mousemove', function(e){
-        var rect = el.getBoundingClientRect();
-        var px = (e.clientX - rect.left) / rect.width;
-        var py = (e.clientY - rect.top) / rect.height;
-        var rx = (0.5 - py) * maxDeg;
-        var ry = (px - 0.5) * maxDeg;
-        el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
-        el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
-        el.style.setProperty('--mx', (px*100).toFixed(1) + '%');
-        el.style.setProperty('--my', (py*100).toFixed(1) + '%');
-      });
-      el.addEventListener('mouseleave', function(){
-        el.style.setProperty('--rx', '0deg');
-        el.style.setProperty('--ry', '0deg');
-      });
-    });
-  }
-
-  /* ---------- 3. Scroll reveal ---------- */
-  function initReveal(){
-    var targets = document.querySelectorAll('.showcase-inner, .card, .mission blockquote, .grid-head');
-    targets.forEach(function(t){ t.classList.add('reveal'); });
-
-    if(reduceMotion || typeof IntersectionObserver === 'undefined'){
-      targets.forEach(function(t){ t.classList.add('in-view'); });
-      return;
-    }
-    var observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
-    targets.forEach(function(t){ observer.observe(t); });
-  }
-
-  document.addEventListener('DOMContentLoaded', function(){
-    initHero3D();
-    attachTilt('.panel', 5);
-    attachTilt('.card', 7);
-    initReveal();
+  var root=document.documentElement, btn=document.getElementById('themeBtn'), label=document.getElementById('themeLabel');
+  function sync(){label.textContent = root.getAttribute('data-theme')==='dark' ? 'Lights on' : 'Lights off';}
+  btn.addEventListener('click',function(){
+    var next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next);}catch(e){}
+    sync();
   });
+  sync();
+
+  /* toast */
+  var toastEl=document.createElement('div');
+  toastEl.className='toast';toastEl.setAttribute('role','status');
+  document.body.appendChild(toastEl);
+  var tt;
+  function toast(m){toastEl.textContent=m;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('show');},2200);}
+
+  /* stickers: drag around, click to pop */
+  var msgs={
+    s1:'Switch online. Zero packet loss.',
+    s2:'Coffee loaded. Ready for the next ticket.',
+    s3:'Keyboard warmed up. RS232 can wait.',
+    s4:'RJ45 plugged in. Link is up.'
+  };
+  var stage=document.querySelector('.stage');
+  document.querySelectorAll('.sticker').forEach(function(s){
+    var key=s.classList[1],sx,sy,ox,oy,moved=false,drag=false;
+    s.setAttribute('role','button');s.setAttribute('tabindex','0');s.setAttribute('aria-label',msgs[key]);
+    function pop(){s.classList.remove('pop');void s.getBoundingClientRect();s.classList.add('pop');toast(msgs[key]);}
+    s.addEventListener('pointerdown',function(e){
+      var r=s.getBoundingClientRect(),st=stage.getBoundingClientRect();
+      ox=r.left-st.left;oy=r.top-st.top;
+      s.style.left=ox+'px';s.style.top=oy+'px';s.style.right='auto';s.style.bottom='auto';
+      sx=e.clientX;sy=e.clientY;moved=false;drag=true;
+      s.setPointerCapture(e.pointerId);s.style.cursor='grabbing';s.style.zIndex=5;
+    });
+    s.addEventListener('pointermove',function(e){
+      if(!drag)return;
+      var dx=e.clientX-sx,dy=e.clientY-sy;
+      if(Math.abs(dx)+Math.abs(dy)>5)moved=true;
+      var st=stage.getBoundingClientRect(),w=s.offsetWidth;
+      s.style.left=Math.max(0,Math.min(st.width-w,ox+dx))+'px';
+      s.style.top=Math.max(0,Math.min(st.height-w,oy+dy))+'px';
+    });
+    s.addEventListener('pointerup',function(){drag=false;s.style.cursor='';if(!moved)pop();});
+    s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pop();}});
+  });
+
+  /* portrait: click for a ping */
+  var pm=['Ping! Reply from Mahdev in under 1 ms.','Still here. Uptime: 100%.','Ticket received. Triaging now.','Have you tried turning it off and on again?'],pi=0;
+  var portrait=document.querySelector('.portrait');
+  portrait.setAttribute('role','button');portrait.setAttribute('tabindex','0');portrait.setAttribute('aria-label','Ping Mahdev');
+  function ping(){toast(pm[pi++%pm.length]);portrait.classList.remove('bounce');void portrait.offsetWidth;portrait.classList.add('bounce');}
+  portrait.addEventListener('click',ping);
+  portrait.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();ping();}});
+
+  /* terminal */
+  var out=document.getElementById('out'),tin=document.getElementById('tin');
+  var cmds={
+    help:'Commands: about, whoami, work, projects, skills, contact, ping, theme, clear',
+    about:'Mahdev Chandran, IT Support Engineer in Singapore. Mission-critical systems for Navy, healthcare and finance.',
+    whoami:'Someone who fixes things before you notice they broke.',
+    work:'2024 - now   IT Support Engineer, Avalanche Mechtronics\n2023 - 2024  Service Desk Engineer, Kyndryl @ IBM',
+    projects:'1. Touchscreen self-service car wash (Python, RS232/MDB, PayNow)\n2. RinggitPing, SGD/MYR Telegram bot (Python, Playwright)',
+    skills:'TCP/IP, LAN/WAN, VPN, Firewalls, Active Directory, RS232-to-TCP, root cause analysis, Python',
+    contact:'mahdevchandran@gmail.com | +65 9446 9673 | github.com/devxskull',
+    ping:'Pinging mahdev...\nReply: time<1ms\nReply: time<1ms\nReply: time<1ms\n0% packet loss',
+    sudo:'Nice try. Permission denied.'
+  };
+  function add(t,cls){var d=document.createElement('div');if(cls)d.className=cls;d.textContent=t;out.appendChild(d);out.scrollTop=out.scrollHeight;}
+  function run(c){
+    c=c.trim().toLowerCase();if(!c)return;
+    add('$ '+c,'cmd');
+    if(c==='clear'){out.innerHTML='';return;}
+    if(c==='theme'){btn.click();add('Theme switched.');return;}
+    add(cmds[c.split(' ')[0]]||'command not found: '+c+' (try help)');
+  }
+  add('Welcome. Type help, or tap a command below.');
+  document.getElementById('tform').addEventListener('submit',function(e){e.preventDefault();run(tin.value);tin.value='';});
+  document.querySelectorAll('[data-cmd]').forEach(function(b){b.addEventListener('click',function(){run(b.getAttribute('data-cmd'));});});
+
+  /* expand / collapse all */
+  var eb=document.getElementById('expandBtn');
+  eb.addEventListener('click',function(){
+    var open=eb.getAttribute('data-open')!=='1';
+    document.querySelectorAll('#work details,#projects details').forEach(function(d){d.open=open;});
+    eb.setAttribute('data-open',open?'1':'0');
+    eb.textContent=open?'Collapse all':'Expand all';
+  });
+
+  /* copy email */
+  document.getElementById('copyEmail').addEventListener('click',function(){
+    var m='mahdevchandran@gmail.com';
+    if(navigator.clipboard){navigator.clipboard.writeText(m).then(function(){toast('Email copied');},function(){toast(m);});}
+    else{toast(m);}
+  });
+
+  /* scroll reveal */
+  if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
+    },{threshold:.12});
+    document.querySelectorAll('section').forEach(function(s){s.classList.add('rv');io.observe(s);});
+  }
 })();
 </script>
-
 </body>
 </html>
